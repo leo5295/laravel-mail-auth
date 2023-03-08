@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
 use App\Models\Technology;
+use App\Models\Lead;
+use App\Mail\NewContact;
+
 
 class ProjectController extends Controller
 {
@@ -53,6 +57,15 @@ class ProjectController extends Controller
             $img_path = Storage::disk('public')->put('project_images', $request->cover_image);
             $new['cover_image'] = $img_path;
         }
+
+        $new_lead = new Lead();
+        $new_lead->title = $new['title'];
+        $new_lead->content = $new['content'];
+        $new_lead->slug = $new['slug'];
+        // $new_lead->author = $new['author'];
+        $new_lead->save();
+
+        Mail::to('info@boolean.it')->send(new NewContact($new_lead));
 
         $project = Project::create($new);
         $project->technologies()->attach($request->technologies);
