@@ -21,8 +21,7 @@
         <tbody>
             @forelse ($projects as $item)
             <tr>
-              <td>
-              <img src="{{ asset('storage/' . $item->cover_image) }}" style="width: 80px">
+              <td><img src="{{ asset('storage/' . $item->cover_image) }}" style="width: 150px" class="rounded card"></td>
               <td>{{$item->title}}</td>
               <td>{{$item->content}}</td>
               <td>{{$item->slug}}</td>

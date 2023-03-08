@@ -21,7 +21,7 @@
     </thead>
     <tbody>
         <tr>
-          <td><img src="{{ asset('storage/' . $project->cover_image) }}"></td>
+          <td><img src="{{ asset('storage/' . $project->cover_image) }}" style="width: 50px"></td>
           <td>{{$project->title}}</td>
           <td>{{$project->content}}</td>
           <td>{{$project->slug}}</td>

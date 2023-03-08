@@ -32,7 +32,12 @@
             <textarea rows="5" class="form-control" id="" aria-describedby="" name="content">{{old('content') ?? $project['content']}}</textarea>
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">Aggiungi img</label>
+          <div>
+            @if ($project['cover_image'])
+              <img src="{{ asset('storage/'.$project['cover_image']) }}" alt="{{ $project['title'] }}" style="max-height: 150px;" class="rounded card">
+            @endif
+          </div>
+          <label for="" class="form-label">Modifica immagine</label>
           <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image" placeholder="Inserisci immagine">
         </div>
         <div class="mb-3">
