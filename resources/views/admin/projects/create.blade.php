@@ -28,7 +28,7 @@
         </div>
         <div class="mb-3">
           <label for="" class="form-label">Aggiungi img</label>
-          <input type="file" class="form-control" id="cover_image" aria-describedby="" name="cover_image @error('cover_image')is-invalid @enderror" placeholder="inserisci immagine">
+          <input type="file" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image" placeholder="Inserisci immagine">
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Aggiungi contenuto</label>

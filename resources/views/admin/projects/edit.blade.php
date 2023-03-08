@@ -32,6 +32,10 @@
             <textarea rows="5" class="form-control" id="" aria-describedby="" name="content">{{old('content') ?? $project['content']}}</textarea>
         </div>
         <div class="mb-3">
+          <label for="" class="form-label">Aggiungi img</label>
+          <input type="file" class="form-control" id="cover_image" aria-describedby="" name="cover_image @error('cover_image')is-invalid @enderror" placeholder="inserisci immagine">
+        </div>
+        <div class="mb-3">
             <label for="" class="form-label">Linguaggio utilizzato</label>
             <select name="type_id" id="type_id">
               @foreach ($types as $item)

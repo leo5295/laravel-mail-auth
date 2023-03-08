@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
 use App\Models\Technology;
-use illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -46,9 +46,13 @@ class ProjectController extends Controller
         // Project::create($request->all());
         // return redirect('/admin.projects.index');
         $new = $request->validated();
-        $img_path = Storage::put('uploads', $new['image']);
+        // $img_path = Storage::put('uploads', $new['image']);
         $slug = Project::generateSlug($request->title);
         $new['slug'] = $slug;
+        if ($request->hasFile('cover_image')) {
+            $img_path = Storage::disk('public')->put('project_images', $request->cover_image);
+            $new['cover_image'] = $img_path;
+        }
         $project = Project::create($new);
         $project->technologies()->attach($request->technologies);
         return redirect()->route('admin.projects.index');

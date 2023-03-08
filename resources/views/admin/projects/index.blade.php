@@ -7,6 +7,7 @@
     <table class="table table-striped">
         <thead>
           <tr>
+            <th scope="col">Img</th>
             <th scope="col">Title</th>
             <th scope="col">Content</th>
             <th scope="col">Slug</th>
@@ -20,6 +21,10 @@
         <tbody>
             @forelse ($projects as $item)
             <tr>
+              <td>
+                <div class="card">
+                    <img src="{{ asset('storage/' . $item->cover_image) }}" alt="Immagine di copertina del progetto">
+                </div>
               <td>{{$item->title}}</td>
               <td>{{$item->content}}</td>
               <td>{{$item->slug}}</td>
