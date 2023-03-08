@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Type;
 use App\Models\Technology;
+use illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -45,6 +46,7 @@ class ProjectController extends Controller
         // Project::create($request->all());
         // return redirect('/admin.projects.index');
         $new = $request->validated();
+        $img_path = Storage::put('uploads', $new['image']);
         $slug = Project::generateSlug($request->title);
         $new['slug'] = $slug;
         $project = Project::create($new);
