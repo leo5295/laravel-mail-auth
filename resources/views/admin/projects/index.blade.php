@@ -22,9 +22,7 @@
             @forelse ($projects as $item)
             <tr>
               <td>
-                <div class="card">
-                    <img src="{{ asset('storage/' . $item->cover_image) }}" alt="Immagine di copertina del progetto">
-                </div>
+              <img src="{{ asset('storage/' . $item->cover_image) }}" style="width: 80px">
               <td>{{$item->title}}</td>
               <td>{{$item->content}}</td>
               <td>{{$item->slug}}</td>

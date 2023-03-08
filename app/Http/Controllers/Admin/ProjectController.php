@@ -43,16 +43,17 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        // Project::create($request->all());
-        // return redirect('/admin.projects.index');
+
         $new = $request->validated();
-        // $img_path = Storage::put('uploads', $new['image']);
+
         $slug = Project::generateSlug($request->title);
         $new['slug'] = $slug;
+
         if ($request->hasFile('cover_image')) {
             $img_path = Storage::disk('public')->put('project_images', $request->cover_image);
             $new['cover_image'] = $img_path;
         }
+
         $project = Project::create($new);
         $project->technologies()->attach($request->technologies);
         return redirect()->route('admin.projects.index');
@@ -94,6 +95,12 @@ class ProjectController extends Controller
         $data = $request->validated();
         $slug = Project::generateSlug($data['title']);
         $data['slug'] = $slug;
+
+        if ($request->hasFile('cover_image')) {
+            $img_path = Storage::disk('public')->put('project_images', $request->cover_image);
+            $data['cover_image'] = $img_path;
+        }
+
         $project->update($data);
         $project->technologies()->sync($request->technologies);
         return redirect()->route('admin.projects.index');

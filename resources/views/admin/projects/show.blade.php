@@ -11,6 +11,7 @@
 <table class="table">
     <thead>
       <tr>
+        <th scope="col">Img</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
         <th scope="col">Slug</th>
@@ -20,6 +21,7 @@
     </thead>
     <tbody>
         <tr>
+          <td><img src="{{ asset('storage/' . $project->cover_image) }}"></td>
           <td>{{$project->title}}</td>
           <td>{{$project->content}}</td>
           <td>{{$project->slug}}</td>
